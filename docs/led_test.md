@@ -6,7 +6,9 @@ The goal of this test is to verify that the microcontroller (Arduino/ESP32) is c
 
 ---
 <p align="center">
-  <img src="images/led_setup.jpg" width="350">
+  <img src="images/led_setup.jpg" height="250">
+  &nbsp;&nbsp;&nbsp;
+  <img src="images/led_setup2.jpg" height="250">
 </p>
 
 ## Setup
