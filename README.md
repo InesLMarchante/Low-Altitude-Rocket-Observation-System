@@ -1,8 +1,6 @@
 # 🚀 Low-Altitude-Rocket-Observation-System
 Three‑phase rocket project: breadboard prototype, PCB design, final integration with microcontroller programming and flight control testing
 
-# Low-Altitude Rocket Observation System
-
 ## Overview
 
 This project aims to develop a low-altitude rocket equipped with a custom-built observation and telemetry system. The goal is to design, prototype, and integrate both hardware and software components to monitor and analyze flight data in real time.
