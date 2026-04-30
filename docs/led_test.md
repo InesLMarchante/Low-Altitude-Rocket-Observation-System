@@ -69,3 +69,82 @@ This basic test validates the foundation of the system. Future steps will includ
 * Input handling
 * Sensor integration
 * Data collection
+
+---
+
+# 🖥️ Extended Test — Serial Control
+
+## Objective
+
+Extend the basic LED test by adding serial communication, allowing the LED to be controlled through user input.
+
+---
+
+## Code
+
+```cpp
+#define LED_PIN 25
+
+void ligarLED() {
+  digitalWrite(LED_PIN, HIGH);
+  Serial.println("LED LIGADO");
+}
+
+void desligarLED() {
+  digitalWrite(LED_PIN, LOW);
+  Serial.println("LED DESLIGADO");
+}
+
+void setup() {
+  pinMode(LED_PIN, OUTPUT);
+  Serial.begin(115200);
+  Serial.println("Sistema iniciado");
+}
+
+void loop() {
+  if (Serial.available()) {
+    char comando = Serial.read();
+
+    if (comando == '1') {
+      ligarLED();
+    }
+
+    if (comando == '0') {
+      desligarLED();
+    }
+  }
+}
+```
+
+---
+
+## Expected Behavior
+
+* Sending `1` → LED ON
+* Sending `0` → LED OFF
+* Serial Monitor prints system status
+
+---
+
+## Results
+
+The system correctly responded to all commands sent via Serial Monitor.
+
+---
+
+## 📷 Note
+
+No image was recorded for this test. This will be added in future updates.
+
+---
+
+## Conclusion
+
+This extension demonstrates that the system can:
+
+* Receive external input
+* Process commands in real time
+* Control outputs dynamically
+
+This is a key step toward more advanced features such as telemetry and remote control.
+
