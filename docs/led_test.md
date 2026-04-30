@@ -24,15 +24,18 @@ The goal of this test is to verify that the microcontroller (Arduino/ESP32) is c
 ## Code
 
 ```cpp
+#define LED 25
 void setup() {
-  pinMode(2, OUTPUT);
+  pinMode(LED, OUTPUT);
+
 }
 
 void loop() {
-  digitalWrite(2, HIGH);
+  digitalWrite(LED, HIGH);
   delay(1000);
-  digitalWrite(2, LOW);
+  digitalWrite(LED, LOW);
   delay(1000);
+
 }
 ```
 
