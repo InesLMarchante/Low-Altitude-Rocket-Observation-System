@@ -5,6 +5,9 @@
 The goal of this test is to verify that the microcontroller (Arduino/ESP32) is correctly set up and capable of controlling a basic output component (LED).
 
 ---
+<p align="center">
+  <img src="images/led_setup.jpg" width="350">
+</p>
 
 ## Setup
 
