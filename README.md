@@ -1,90 +1,58 @@
-# 🚀 Low-Altitude-Rocket-Observation-System
-Three‑phase rocket project: breadboard prototype, PCB design, final integration with microcontroller programming and flight control testing
+# Low-Altitude Rocket Observation System
+
+A model rocket with a custom flight computer that records altitude, acceleration and rotation data on a microSD card and runs a state machine intended to trigger a parachute release. Developed as a hands-on project combining software, electronics and physics.
+
+📄 **Full report:** see `docs/` (Low-Altitude_Rocket.pdf)
 
 ## Overview
 
-This project aims to develop a low-altitude rocket equipped with a custom-built observation and telemetry system. The goal is to design, prototype, and integrate both hardware and software components to monitor and analyze flight data in real time.
+- **Flight computer:** ESP32 with a BMP280 barometer and an MPU6050 accelerometer/gyroscope
+- **Data logging:** one CSV row per sample (up to 20 Hz) written to a microSD card
+- **Flight software:** finite state machine with four states (0 Pad, 1 Ascent, 2 Ejection, 3 Descent)
+- **Recovery:** a nichrome wire, switched by a MOSFET, burns the line that holds the parachute compartment closed
+- **Rocket:** about 310 g, Estes C6-3 motor, cardboard airframe with self-made plastic fins
 
-The project combines embedded systems, electronics, and software engineering to create a complete end-to-end solution — from ground testing to flight deployment.
+## Status
 
----
+Version 1 was built, bench-tested and flown three times. The data logging worked in all three flights. The state machine never left State 0 in flight, because the barometer (as configured) was too slow to detect such short flights (1 to 3 s), so the parachute ejection was never triggered in flight. The electronic part of the recovery sequence was validated on the bench; the nose-cone separation was not.
 
-## Objectives
+Planned for Version 2: detecting lift-off from the acceleration, a timer as backup, a faster barometer configuration, better mass distribution and stability, and a redesigned ejection mechanism (for example, a servomotor opening the parachute compartment).
 
-* Design a reliable onboard system using a microcontroller (ESP32 / Arduino-based)
-* Collect and process flight data (e.g., altitude, acceleration, system status)
-* Develop a modular and scalable architecture for future improvements
-* Gain hands-on experience in electronics prototyping, PCB design, and embedded programming
+## Hardware
 
----
+| Component | Function |
+|---|---|
+| ESP32 | Reads sensors, runs the state machine, logs data |
+| BMP280 | Barometric pressure / relative altitude |
+| MPU6050 | 3-axis accelerometer and gyroscope |
+| microSD module | Stores the flight log (CSV) |
+| 800 mAh LiPo | Powers the ESP32 and peripherals |
+| 600 mAh LiPo | Powers only the nichrome wire |
+| IRLZ44N MOSFET + nichrome wire | Burns the line that releases the parachute |
+| LEDs, buzzer, reset button | Status indication and restart without opening the rocket |
 
-## Project Phases
+## Software
 
-### Phase 1 — Breadboard Prototyping
+Written in C++ with the Arduino framework (Arduino IDE), using the `Adafruit_Sensor`, `Adafruit_BMP280` and `Adafruit_MPU6050` libraries.
 
-* Initial hardware setup using development boards (ESP32 / Arduino)
-* Basic component testing (LEDs, buttons, sensors)
-* Validation of circuit connections and power requirements
-* Serial communication and basic data output
+## Repository structure
 
-### Phase 2 — PCB Design
+- `firmware/` — flight software (state machine, sensor reading, logging)
+- `firmware/tests/` — test sketches for each component
+- `data/` — logs of the three flight tests
+- `docs/` — project report
+- `photos/` — photos of the build process
 
-* Transition from breadboard to custom PCB
-* Circuit optimization and component integration
-* Improved robustness and compact design
-* Preparation for real-world testing conditions (vibration, stability)
+## Flight data
 
-### Phase 3 — Integration & Flight Testing
+| File | Description |
+|---|---|
+| `flight_realtest1_log_PROJETO.xlsx` | Flight Test 1 (no launch rod) |
+| `flight_realtest2_log.csv` | Flight Test 2 (semicolon-separated) |
+| `flight_realtest3_log.csv` | Flight Test 3 (comma-separated) |
 
-* Integration into a low-altitude rocket structure
-* Implementation of telemetry and data logging
-* Ground testing and validation
-* Controlled flight tests and data analysis
+Columns: time (ms), state, relative altitude (m), acceleration x/y/z (m/s²), angular rate x/y/z (rad/s).
 
----
+## Author
 
-## Current Status
-
-The project is currently in an early prototyping stage.
-
-So far, initial tests have been performed to validate:
-
-* Microcontroller setup
-* Basic input/output operations (e.g., LED control)
-* Development environment configuration
-
-These tests are essential to ensure a stable foundation before moving into more complex hardware and system integration.
-
----
-
-## Technologies & Tools
-
-* Microcontrollers: ESP32 / Arduino
-* Programming: C / C++ (Arduino framework)
-* Hardware: Breadboard prototyping components
-* Development tools: Arduino IDE / VS Code
-
----
-
-## Repository Structure
-
-* "hardware/" — physical components, schematics, PCB design
-* "software/" — embedded code and system logic
-* "docs/" — documentation and design notes
-* "data/" — collected data and test results
-
----
-
-## Future Work
-
-* Integrate sensors (altimeter, accelerometer)
-* Implement data logging system
-* Develop telemetry communication (optional)
-* Design and manufacture custom PCB
-* Perform controlled low-altitude test flights
-
----
-
-## 👩‍💻 Author
-
-Inês Marchante
+Inês Lage Marchante: BSc in Computer Engineering
