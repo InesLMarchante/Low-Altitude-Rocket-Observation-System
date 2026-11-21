@@ -2,7 +2,7 @@
 
 A model rocket with a custom flight computer that records altitude, acceleration and rotation data on a microSD card and runs a state machine intended to trigger a parachute release. Developed as a hands-on project combining software, electronics and physics.
 
-📄 **Full report:** see `docs/` (Low-Altitude_Rocket.pdf)
+📄 **Full report:** [`docs/Low-Altitude_Rocket_final.pdf`](docs/Low-Altitude_Rocket_final.pdf)
 
 ## Overview
 
@@ -33,26 +33,30 @@ Planned for Version 2: detecting lift-off from the acceleration, a timer as back
 
 ## Software
 
-Written in C++ with the Arduino framework (Arduino IDE), using the `Adafruit_Sensor`, `Adafruit_BMP280` and `Adafruit_MPU6050` libraries.
+Written in C++ with the Arduino framework (Arduino IDE), using the Adafruit_Sensor, Adafruit_BMP280 and Adafruit_MPU6050 libraries. The flight software is `software/LaunchCode.ino`; the other sketches test each component.
 
 ## Repository structure
 
-- `firmware/` — flight software (state machine, sensor reading, logging)
-- `firmware/tests/` — test sketches for each component
-- `data/` — logs of the three flight tests
-- `docs/` — project report
-- `photos/` — photos of the build process
+- `software/` — flight software (`LaunchCode.ino`) and test sketches for each component
+- `data/` — logs of the three flight tests and the bench test of the recovery sequence
+- `docs/` — project report (PDF), photos (`docs/images/`) and videos (`docs/videos/`)
+- `LICENSE` — MIT license
 
 ## Flight data
 
 | File | Description |
 |---|---|
-| `flight_realtest1_log_PROJETO.xlsx` | Flight Test 1 (no launch rod) |
-| `flight_realtest2_log.csv` | Flight Test 2 (semicolon-separated) |
-| `flight_realtest3_log.csv` | Flight Test 3 (comma-separated) |
+| `data/flight_parachute_test1_log.xlsx` | Bench test of the recovery sequence (rocket raised by hand) |
+| `data/flight_realtest1_log.xlsx` | Flight Test 1 (no launch rod) |
+| `data/flight_realtest2_log.xlsx` | Flight Test 2 (launch rod; ground reference taken with the rocket in the hand) |
+| `data/flight_realtest3_log.xlsx` | Flight Test 3 (launch rod; ground reference taken on the launch platform) |
 
 Columns: time (ms), state, relative altitude (m), acceleration x/y/z (m/s²), angular rate x/y/z (rad/s).
 
 ## Author
 
 Inês Lage Marchante: BSc in Computer Engineering
+
+## License
+
+Released under the MIT license (see `LICENSE`).
